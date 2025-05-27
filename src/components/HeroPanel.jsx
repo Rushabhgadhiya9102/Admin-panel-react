@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-// import Chart from "./Chart";
+import Chart from "./Chart";
 
 const HeroPanel = () => {
   return (
@@ -130,7 +130,7 @@ const HeroPanel = () => {
                   </div>
                   <div className="card-body">
                     <div className="chart-container" style={{ minHeight: 375 }}>
-                      {/* <Chart /> */}
+                      <Chart />
                     </div>
                   </div>
                 </div>
@@ -656,7 +656,7 @@ const HeroPanel = () => {
               </ul>
             </nav>
             <div className="copyright">
-              2024, made with <i className="fa fa-heart heart text-danger" /> by
+              {new Date().getFullYear()}, made with <i className="fa fa-heart heart text-danger" /> by
               <a href="http://www.themekita.com">ThemeKita</a>
             </div>
             <div>

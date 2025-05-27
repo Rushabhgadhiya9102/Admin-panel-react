@@ -1,7 +1,8 @@
 import React from "react";
 import Header from "../components/Header";
 
-const Table = () => {
+const Table = (props) => {
+  const { productData } = props;
   return (
     <>
       <div className="main-panel">
@@ -31,431 +32,36 @@ const Table = () => {
               </ul>
             </div>
             <div className="row">
-              <div className="col-md-6">
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Basic Table</div>
-                  </div>
-                  <div className="card-body">
-                    <div className="card-sub">
-                      This is the basic table view of the ready dashboard :
-                    </div>
-                    <table className="table mt-3">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Striped Rows</div>
-                  </div>
-                  <div className="card-body">
-                    <div className="card-sub">
-                      Add
-                      <code className="highlighter-rouge">
-                        .table-striped
-                      </code>{" "}
-                      to rows the striped table
-                    </div>
-                    <table className="table table-striped mt-3">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="card-sub">
-                      Add
-                      <code className="#highlighter-rouge">
-                        .table-striped-bg-*states
-                      </code>
-                      to change background from striped rows
-                    </div>
-                    <table className="table table-striped table-striped-bg-black mt-3">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table className="table table-striped table-striped-bg-danger mt-4">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Responsive Table</div>
-                  </div>
-                  <div className="card-body">
-                    <div className="card-sub">
-                      Create responsive tables by wrapping any table with
-                      <code className="highlighter-rouge">
-                        .table-responsive
-                      </code>
-                      <code className="highlighter-rouge">DIV</code> to make
-                      them scroll horizontally on small devices
-                    </div>
-                    <div className="table-responsive">
-                      <table className="table table-bordered">
-                        <thead>
+              <div className="col-lg-12">
+                <div className="card p-5">
+                  <table className="table table-striped">
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Images</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th>Description</th>
+                        <th>Ware House</th>
+                        <th>Stocks</th>
+                        <th>Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {productData.map((val, index) => {
+                        return (
                           <tr>
-                            <th>#</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
-                            <th>Table heading</th>
+                            <td>{index + 1}</td>
+                            <td>{val.productname}</td>
+                            <td>{val.productprice}</td>
+                            <td>{val.stock}</td>
+                            <td>{val.description}</td>
+                            <td>{val.warehouse}</td>
                           </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            <th scope="row">1</th>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">2</th>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                          </tr>
-                          <tr>
-                            <th scope="row">3</th>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                            <td>Table cell</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Hoverable Table</div>
-                  </div>
-                  <div className="card-body">
-                    <table className="table table-hover">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Bordered Table</div>
-                  </div>
-                  <div className="card-body">
-                    <div className="card-sub">
-                      Add
-                      <code className="highlighter-rouge">
-                        .table-bordered
-                      </code>{" "}
-                      to create a bordered table
-                    </div>
-                    <table className="table table-bordered">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="card-sub">
-                      You can also add
-                      <code className="highlighter-rouge">
-                        .table-bordered-bd-*states
-                      </code>
-                      to change the border color of the table
-                    </div>
-                    <table className="table table-bordered table-bordered-bd-warning mt-4">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <div className="card-sub">
-                      It can also add
-                      <code className="highlight-rouge">
-                        .table-head-bg-*states
-                      </code>
-                      so that the table header has the same color as the border
-                      color of the table
-                    </div>
-                    <table className="table table-bordered table-head-bg-info table-bordered-bd-info mt-4">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-                <div className="card">
-                  <div className="card-header">
-                    <div className="card-title">Table Head States</div>
-                  </div>
-                  <div className="card-body">
-                    <table className="table table-head-bg-success">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <table className="table table-head-bg-primary mt-4">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">First</th>
-                          <th scope="col">Last</th>
-                          <th scope="col">Handle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr>
-                          <td>1</td>
-                          <td>Mark</td>
-                          <td>Otto</td>
-                          <td>@mdo</td>
-                        </tr>
-                        <tr>
-                          <td>2</td>
-                          <td>Jacob</td>
-                          <td>Thornton</td>
-                          <td>@fat</td>
-                        </tr>
-                        <tr>
-                          <td>3</td>
-                          <td colSpan={2}>Larry the Bird</td>
-                          <td>@twitter</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -485,7 +91,7 @@ const Table = () => {
               </ul>
             </nav>
             <div className="copyright">
-              2024, made with <i className="fa fa-heart heart text-danger" /> by
+              {new Date().getFullYear()}, made with <i className="fa fa-heart heart text-danger" /> by
               <a href="http://www.themekita.com">ThemeKita</a>
             </div>
             <div>
