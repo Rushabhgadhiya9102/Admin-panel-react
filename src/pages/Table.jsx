@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
+import { FaTrash } from "react-icons/fa";
 
 const Table = (props) => {
-  const { productData } = props;
+  const { productData, handleDelete } = props;
   return (
     <>
       <div className="main-panel">
@@ -52,11 +53,17 @@ const Table = (props) => {
                         return (
                           <tr>
                             <td>{index + 1}</td>
+                            <td>
+                              <img src={val.image?.url || ''} className="w-25 h-25 img-fluid" alt="" />
+                            </td>
                             <td>{val.productname}</td>
                             <td>{val.productprice}</td>
                             <td>{val.stock}</td>
                             <td>{val.description}</td>
                             <td>{val.warehouse}</td>
+                            <td>
+                              <button className="btn btn-outline-danger" onClick={()=>handleDelete(val.id)}><FaTrash /></button>
+                            </td>
                           </tr>
                         );
                       })}

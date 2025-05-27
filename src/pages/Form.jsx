@@ -2,7 +2,7 @@ import React from "react";
 import Header from "../components/Header";
 
 const Form = (props) => {
-  const { handleChange, handleSubmit, product, warehouse } = props;
+  const { handleChange, handleSubmit, handleCancel, product, warehouse } = props;
 
   return (
     <>
@@ -88,12 +88,14 @@ const Form = (props) => {
                             htmlFor="exampleFormControlFile1"
                             className="form-label"
                           >
-                            Example file input
+                            Product Images
                           </label>
                           <input
                             type="file"
                             className="form-control"
-                            id="exampleFormControlFile1"
+                            id="image"
+                            name="image"
+                            onChange={handleChange}
                           />
                         </div>
                         <div className="form-group">
@@ -165,7 +167,7 @@ const Form = (props) => {
                   </div>
                   <div className="card-action">
                     <button className="btn btn-success mx-3">Submit</button>
-                    <button className="btn btn-danger">Cancel</button>
+                    <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
                   </div>
                 </form>
               </div>
