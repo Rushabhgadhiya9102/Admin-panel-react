@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
-import { FaTrash } from "react-icons/fa";
+import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
 const Table = (props) => {
-  const { productData, handleDelete } = props;
+  const { productData, handleDelete, handleEdit } = props;
   return (
     <>
       <div className="main-panel">
@@ -34,35 +34,38 @@ const Table = (props) => {
             </div>
             <div className="row">
               <div className="col-lg-12">
-                <div className="card p-5">
+                <div className="card p-3">
                   <table className="table table-striped">
                     <thead>
                       <tr>
                         <th>#</th>
                         <th>Images</th>
                         <th>Product Name</th>
-                        <th>Price</th>
                         <th>Description</th>
-                        <th>Ware House</th>
+                        <th>Price</th>
                         <th>Stocks</th>
+                        <th>Ware House</th>
                         <th>Action</th>
                       </tr>
                     </thead>
                     <tbody>
                       {productData.map((val, index) => {
+
+                        const {image, productname, description, productprice, stock, warehouse, id} = val 
                         return (
                           <tr>
                             <td>{index + 1}</td>
                             <td>
-                              <img src={val.image?.url || ''} className="w-25 h-25 img-fluid" alt="" />
+                              <img src={image?.url || ''} className="w-25 h-25 img-fluid" alt={productname} />
                             </td>
-                            <td>{val.productname}</td>
-                            <td>{val.productprice}</td>
-                            <td>{val.stock}</td>
-                            <td>{val.description}</td>
-                            <td>{val.warehouse}</td>
-                            <td>
-                              <button className="btn btn-outline-danger" onClick={()=>handleDelete(val.id)}><FaTrash /></button>
+                            <td>{productname}</td>
+                            <td>{description}</td>
+                            <td>${productprice}</td>
+                            <td>{stock}</td>
+                            <td>{warehouse}</td>
+                            <td className="d-flex gap-2">
+                              <button className="btn btn-outline-danger" onClick={()=>handleDelete(id)}><FaTrash /></button>
+                              <button className="btn btn-outline-warning" onClick={()=>handleEdit(id)}><FaPencilAlt /></button>
                             </td>
                           </tr>
                         );

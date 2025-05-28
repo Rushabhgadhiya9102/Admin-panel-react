@@ -7,7 +7,7 @@ import "./assets/css/plugins.min.css";
 import Home from "./pages/Home";
 import Form from "./pages/Form";
 import Table from "./pages/Table";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Aside from "./components/Aside";
 
 const App = () => {
@@ -17,14 +17,21 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productData, setProductData] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
+  const [editId, setEditId] = useState(null)
 
    // --------- S T A T E - H A N D L E - E N D -----------
+
+   // --------- R E F R E N C E S - S T A T E - H A N D L E - S T A R T -------------
+
+   const navigate = useNavigate()
+
+   // --------- R E F R E N C E S - S T A T E - H A N D L E - E N D -------------
 
    // --------- L O C A L - S T O R A G E - S T A R T ------------
 
     useEffect(()=>{
 
-    const storedData = JSON.parse(localStorage.getItem("productData")) || []
+    let storedData = JSON.parse(localStorage.getItem("productData")) || []
     setProductData(storedData)
 
     },[])
@@ -87,12 +94,34 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const newData = [...productData, { ...product, id: Date.now() }];
-    setProductData(newData);
+    // --------- EDIT SECTION ----------
 
-    console.log(newData);
+    if(editId === null){
+
+      const newData = [...productData, { ...product, id: Date.now() }];
+      setProductData(newData);
+      localStorage.setItem("productData", JSON.stringify(newData))
+
+    }else{
+
+      let data = productData.map((val)=>{
+
+        if(val.id === editId){
+          val = product
+        }
+        return val
+      })
+
+      localStorage.setItem("productData", JSON.stringify(data))
+      setProductData(data)
+      setEditId(null)
+      
+    }
+
     setProduct({});
     setWarehouse([]);
+    navigate('/Table')
+    
   };
 
   // ---------- H A N D L E - S U B M I T - E N D -----------
@@ -108,16 +137,41 @@ const App = () => {
   }
   // ---------- H A N D L E - C A N C E L - E N D -----------
 
-  // ---------- H A N D L E - D E L E T E -------------
+  // ---------- H A N D L E - D E L E T E - S T A R T -------------
 
   const handleDelete = (id) => {
+
     let removeData = productData.filter((val) => val.id !== id);
     setProductData(removeData);
+    localStorage.setItem("productData", JSON.stringify(removeData))
+
   };
+
+  // ---------- H A N D L E - D E L E T E - E N D -------------
+
+  // ---------- H A N D L E - E D I T - S T A R T -------------
+
+    const handleEdit = (id) =>{
+
+      let editData = productData.filter((val) => val.id === id)[0]
+
+      if(editData){
+
+        setProduct(editData)
+        setWarehouse(editData.warehouse || [])
+        setEditId(id)
+
+      }
+
+      navigate('/Form')
+
+    }
+
+  // ---------- H A N D L E - E D I T - E N D -------------
 
   return (
     <>
-      <Router>
+      
         <Aside />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -139,12 +193,12 @@ const App = () => {
               <Table
                 productData={productData}
                 handleDelete={handleDelete}
-                // id={id}
+                handleEdit = {handleEdit}
               />
             }
           />
         </Routes>
-      </Router>
+     
     </>
   );
 };

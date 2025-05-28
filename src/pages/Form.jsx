@@ -166,7 +166,7 @@ const Form = (props) => {
                     </div>
                   </div>
                   <div className="card-action">
-                    <button className="btn btn-success mx-3">Submit</button>
+                    <button className="btn btn-success mx-3" >Submit</button>
                     <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
                   </div>
                 </form>
