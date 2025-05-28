@@ -1,8 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
 import Chart from "../components/Chart";
+import { LineChart } from "@mui/x-charts";
 
-const Home = ({productData}) => {
+const Home = ({ productData }) => {
   return (
     <>
       <div className="main-panel">
@@ -129,7 +130,7 @@ const Home = ({productData}) => {
                     </div>
                   </div>
                   <div className="card-body">
-                    <div className="chart-container" style={{ minHeight: 375 }}>
+                    <div className="chart-container" style={{ height:"315px" }}>
                       <Chart />
                     </div>
                   </div>
@@ -175,9 +176,7 @@ const Home = ({productData}) => {
                     <div className="mb-4 mt-2">
                       <h1>$4,578.58</h1>
                     </div>
-                    <div className="pull-in">
-                      <canvas id="dailySalesChart" />
-                    </div>
+                    <div className="pull-in"></div>
                   </div>
                 </div>
                 <div className="card card-round">
@@ -186,7 +185,15 @@ const Home = ({productData}) => {
                     <h2 className="mb-2">17</h2>
                     <p className="text-muted">Users online</p>
                     <div className="pull-in sparkline-fix">
-                      <div id="lineChart" />
+                      <LineChart
+                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                        series={[
+                          {
+                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                          },
+                        ]}
+                        height={100}
+                      />
                     </div>
                   </div>
                 </div>
@@ -214,7 +221,7 @@ const Home = ({productData}) => {
                   </div>
                   <div className="card-body">
                     <div className="row">
-                      <div className="col-md-6">
+                      <div className="col-md-12">
                         <div className="table-responsive table-hover table-sales">
                           <table className="table">
                             <thead>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./assets/css/bootstrap.min.css";
 import "./assets/css/fonts.min.css";
 import "./assets/css/kaiadmin.min.css";
@@ -18,12 +18,14 @@ const App = () => {
   const [productData, setProductData] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
   const [editId, setEditId] = useState(null)
+  const [error,setError] = useState({})
 
    // --------- S T A T E - H A N D L E - E N D -----------
 
    // --------- R E F R E N C E S - S T A T E - H A N D L E - S T A R T -------------
 
    const navigate = useNavigate()
+   const inputRef = useRef()
 
    // --------- R E F R E N C E S - S T A T E - H A N D L E - E N D -------------
 
@@ -99,6 +101,8 @@ const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    if(!handleValidation()) return
+
     // --------- EDIT SECTION ----------
 
     if(editId === null){
@@ -125,6 +129,7 @@ const App = () => {
 
     setProduct({});
     setWarehouse([]);
+    inputRef.current.value = ""
     navigate('/Table')
     
   };
@@ -174,6 +179,25 @@ const App = () => {
 
   // ---------- H A N D L E - E D I T - E N D -------------
 
+  // ---------- H A N D L E - V A L I D A T I O N - S T A R T -------------
+
+    const handleValidation = ()=>{
+
+      let errors = {}
+      
+      if(!product.productname)errors.productname = "Product name is required"
+      if(!product.productprice)errors.productprice = "Product price is required"
+      if(!product.stock)errors.stock = "Product stock is required"
+      if(!product.description)errors.description = "Product description is required"
+      if(!product.warehouse)errors.warehouse = "Product warehouse is required"
+
+      setError(errors)
+      return Object.keys(errors).length === 0
+
+    }
+
+  // ---------- H A N D L E - V A L I D A T I O N - E N D -------------
+
   return (
     <>
       
@@ -189,6 +213,8 @@ const App = () => {
                 handleCancel={handleCancel}
                 product={product}
                 warehouse={warehouse}
+                error={error}
+                inputRef={inputRef}
               />
             }
           />

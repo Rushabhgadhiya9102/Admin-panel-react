@@ -60,7 +60,7 @@ const Table = (props) => {
                             </td>
                             <td>{productname}</td>
                             <td>{description}</td>
-                            <td>${productprice}</td>
+                            <td>$ {productprice}</td>
                             <td>{stock}</td>
                             <td>{warehouse}</td>
                             <td className="d-flex gap-2">

@@ -2,7 +2,15 @@ import React from "react";
 import Header from "../components/Header";
 
 const Form = (props) => {
-  const { handleChange, handleSubmit, handleCancel, product, warehouse } = props;
+  const {
+    handleChange,
+    handleSubmit,
+    handleCancel,
+    product,
+    warehouse,
+    inputRef,
+    error,
+  } = props;
 
   return (
     <>
@@ -56,6 +64,11 @@ const Form = (props) => {
                             id="name"
                             placeholder="Enter Product Name"
                           />
+                          {error.productname && (
+                            <span className="text-danger my-2">
+                              {error.productname}
+                            </span>
+                          )}
                         </div>
                         <div className="form-group">
                           <label htmlFor="price">Product Price</label>
@@ -68,6 +81,11 @@ const Form = (props) => {
                             id="price"
                             placeholder="Product Price"
                           />
+                          {error.productprice && (
+                            <span className="text-danger my-2">
+                              {error.productprice}
+                            </span>
+                          )}
                         </div>
 
                         <div className="form-group">
@@ -81,6 +99,11 @@ const Form = (props) => {
                             id="name"
                             placeholder="Enter Stock"
                           />
+                          {error.stock && (
+                            <span className="text-danger my-2">
+                              {error.stock}
+                            </span>
+                          )}
                         </div>
 
                         <div className="form-group">
@@ -95,6 +118,7 @@ const Form = (props) => {
                             className="form-control"
                             id="image"
                             name="image"
+                            ref={inputRef}
                             onChange={handleChange}
                           />
                         </div>
@@ -110,64 +134,84 @@ const Form = (props) => {
                             id="description"
                             rows={5}
                           />
+                          {error.description && (
+                            <span className="text-danger my-2">
+                              {error.description}
+                            </span>
+                          )}
                         </div>
-                        <div className="form-check form-check-inline">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="flexCheckDefault"
-                            name="warehouse"
-                            value="Surat"
-                            onChange={handleChange}
-                            checked={warehouse.includes("Surat") ? true : false}
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
-                          >
-                            Surat
-                          </label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="flexCheckDefault"
-                            name="warehouse"
-                            value="Navsari"
-                            onChange={handleChange}
-                            checked={warehouse.includes("Navsari") ? true : false}
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
-                          >
-                            Navsari
-                          </label>
-                        </div>
-                        <div className="form-check form-check-inline">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="flexCheckDefault"
-                            name="warehouse"
-                            value="Daman"
-                            onChange={handleChange}
-                            checked={warehouse.includes("Daman") ? true : false}
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="flexCheckDefault"
-                          >
-                            Daman
-                          </label>
+                        <div>
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="flexCheckDefault"
+                              name="warehouse"
+                              value="Surat"
+                              onChange={handleChange}
+                              checked={
+                                warehouse.includes("Surat") ? true : false
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="flexCheckDefault"
+                            >
+                              Surat
+                            </label>
+                          </div>
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="flexCheckDefault"
+                              name="warehouse"
+                              value="Navsari"
+                              onChange={handleChange}
+                              checked={
+                                warehouse.includes("Navsari") ? true : false
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="flexCheckDefault"
+                            >
+                              Navsari
+                            </label>
+                          </div>
+                          <div className="form-check form-check-inline">
+                            <input
+                              className="form-check-input"
+                              type="checkbox"
+                              id="flexCheckDefault"
+                              name="warehouse"
+                              value="Daman"
+                              onChange={handleChange}
+                              checked={
+                                warehouse.includes("Daman") ? true : false
+                              }
+                            />
+                            <label
+                              className="form-check-label"
+                              htmlFor="flexCheckDefault"
+                            >
+                              Daman
+                            </label>
+                          </div>
+                          {error.warehouse && (
+                            <span className="text-danger my-2">
+                              {error.warehouse}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
                   </div>
                   <div className="card-action">
-                    <button className="btn btn-success mx-3" >Submit</button>
-                    <button className="btn btn-danger" onClick={handleCancel}>Cancel</button>
+                    <button className="btn btn-success mx-3">Submit</button>
+                    <button className="btn btn-danger" onClick={handleCancel}>
+                      Cancel
+                    </button>
                   </div>
                 </form>
               </div>
@@ -198,7 +242,8 @@ const Form = (props) => {
               </ul>
             </nav>
             <div className="copyright">
-              {new Date().getFullYear()}, made with <i className="fa fa-heart heart text-danger" /> by
+              {new Date().getFullYear()}, made with{" "}
+              <i className="fa fa-heart heart text-danger" /> by
               <a href="http://www.themekita.com">ThemeKita</a>
             </div>
             <div>
