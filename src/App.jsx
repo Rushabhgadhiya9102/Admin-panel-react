@@ -17,6 +17,7 @@ const App = () => {
   const [product, setProduct] = useState({});
   const [productData, setProductData] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
+  const [order, setOrder] = useState([])
   const [editId, setEditId] = useState(null)
   const [error,setError] = useState({})
 
@@ -198,12 +199,26 @@ const App = () => {
 
   // ---------- H A N D L E - V A L I D A T I O N - E N D -------------
 
+  // ---------- handle - order - start ------------
+
+    const handleOrder = (id)=>{
+
+      const selectedProduct = productData.find((item) => item.id === id)
+      
+      const orderData = [...order, selectedProduct]
+      setOrder(orderData)
+
+      console.log(orderData)
+    }
+
+  // ---------- handle - order - end ------------
+
   return (
     <>
       
         <Aside />
         <Routes>
-          <Route path="/" element={<Home productData={productData} />} />
+          <Route path="/" element={<Home productData={productData} order={order} />} />
           <Route
             path="/Form"
             element={
@@ -225,6 +240,7 @@ const App = () => {
                 productData={productData}
                 handleDelete={handleDelete}
                 handleEdit = {handleEdit}
+                handleOrder={handleOrder}
               />
             }
           />

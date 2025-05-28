@@ -1,9 +1,9 @@
 import React from "react";
 import Header from "../components/Header";
-import Chart from "../components/Chart";
 import { LineChart } from "@mui/x-charts";
 
-const Home = ({ productData }) => {
+const Home = (props) => {
+  const { productData, order } = props;
   return (
     <>
       <div className="main-panel">
@@ -130,8 +130,20 @@ const Home = ({ productData }) => {
                     </div>
                   </div>
                   <div className="card-body">
-                    <div className="chart-container" style={{ height:"315px" }}>
-                      <Chart />
+                    <div
+                      className="chart-container"
+                      style={{ height: "315px" }}
+                    >
+                      <LineChart
+                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                        series={[
+                          {
+                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                            area: true,
+                          },
+                        ]}
+                        height={300}
+                      />
                     </div>
                   </div>
                 </div>
@@ -201,10 +213,13 @@ const Home = ({ productData }) => {
             </div>
             <div className="row">
               <div className="col-md-12">
-                <div className="card card-round">
+                <div
+                  className="card card-round overflow-y-scroll"
+                  style={{ height: "500px" }}
+                >
                   <div className="card-header">
                     <div className="card-head-row card-tools-still-right">
-                      <h4 className="card-title">Users Geolocation</h4>
+                      <h4 className="card-title">Product Overview</h4>
                       <div className="card-tools">
                         <button className="btn btn-icon btn-link btn-primary btn-xs">
                           <span className="fa fa-angle-down" />
@@ -222,7 +237,7 @@ const Home = ({ productData }) => {
                   <div className="card-body">
                     <div className="row">
                       <div className="col-md-12">
-                        <div className="table-responsive table-hover table-sales">
+                        <div className="table-responsive  table-hover table-sales">
                           <table className="table">
                             <thead>
                               <tr>
@@ -244,7 +259,6 @@ const Home = ({ productData }) => {
                                   productprice,
                                   stock,
                                   warehouse,
-                                  id,
                                 } = val;
                                 return (
                                   <tr>
@@ -277,7 +291,7 @@ const Home = ({ productData }) => {
                           <div
                             id="world-map"
                             className="w-100"
-                            style={{ height: 300 }}
+                            style={{ height: 0 }}
                           />
                         </div>
                       </div>
@@ -289,148 +303,32 @@ const Home = ({ productData }) => {
             <div className="row">
               <div className="col-md-4">
                 <div className="card card-round">
+                  <div className="card-header">
+                    <h4 className="card-title">Order Palced</h4>
+                  </div>
                   <div className="card-body">
-                    <div className="card-head-row card-tools-still-right">
-                      <div className="card-title">New Customers</div>
-                      <div className="card-tools">
-                        <div className="dropdown">
-                          <button
-                            className="btn btn-icon btn-clean me-0"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            <i className="fas fa-ellipsis-h" />
-                          </button>
-                          <div
-                            className="dropdown-menu"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <a className="dropdown-item" href="#">
-                              Action
-                            </a>
-                            <a className="dropdown-item" href="#">
-                              Another action
-                            </a>
-                            <a className="dropdown-item" href="#">
-                              Something else here
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="card-list py-4">
-                      <div className="item-list">
-                        <div className="avatar">
-                          <img
-                            src="assets/img/jm_denis.jpg"
-                            alt="..."
-                            className="avatar-img rounded-circle"
-                          />
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Jimmy Denis</div>
-                          <div className="status">Graphic Designer</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                      <div className="item-list">
-                        <div className="avatar">
-                          <span className="avatar-title rounded-circle border border-white">
-                            CF
-                          </span>
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Chandra Felix</div>
-                          <div className="status">Sales Promotion</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                      <div className="item-list">
-                        <div className="avatar">
-                          <img
-                            src="assets/img/talha.jpg"
-                            alt="..."
-                            className="avatar-img rounded-circle"
-                          />
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Talha</div>
-                          <div className="status">Front End Designer</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                      <div className="item-list">
-                        <div className="avatar">
-                          <img
-                            src="assets/img/chadengle.jpg"
-                            alt="..."
-                            className="avatar-img rounded-circle"
-                          />
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Chad</div>
-                          <div className="status">CEO Zeleaf</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                      <div className="item-list">
-                        <div className="avatar">
-                          <span className="avatar-title rounded-circle border border-white bg-primary">
-                            H
-                          </span>
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Hizrian</div>
-                          <div className="status">Web Designer</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                      <div className="item-list">
-                        <div className="avatar">
-                          <span className="avatar-title rounded-circle border border-white bg-secondary">
-                            F
-                          </span>
-                        </div>
-                        <div className="info-user ms-3">
-                          <div className="username">Farrah</div>
-                          <div className="status">Marketing</div>
-                        </div>
-                        <button className="btn btn-icon btn-link op-8 me-1">
-                          <i className="far fa-envelope" />
-                        </button>
-                        <button className="btn btn-icon btn-link btn-danger op-8">
-                          <i className="fas fa-ban" />
-                        </button>
-                      </div>
-                    </div>
+                    <table className="table table-responsive">
+                      <thead className="thead-light">
+                        <tr>
+                          <th>#</th>
+                          <th>Product Name</th>
+                          <th>Price</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {order.map((val, index) => {
+                          const { productname, productprice } = val;
+
+                          return (
+                            <tr>
+                              <td>{index + 1}</td>
+                              <td>{productname}</td>
+                              <td>$ {productprice}</td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>

@@ -1,9 +1,10 @@
 import React from "react";
 import Header from "../components/Header";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
+import { TbShoppingCartCopy } from "react-icons/tb";
 
 const Table = (props) => {
-  const { productData, handleDelete, handleEdit } = props;
+  const { productData, handleDelete, handleEdit, handleOrder } = props;
   return (
     <>
       <div className="main-panel">
@@ -64,8 +65,9 @@ const Table = (props) => {
                             <td>{stock}</td>
                             <td>{warehouse}</td>
                             <td className="d-flex gap-2">
-                              <button className="btn btn-outline-danger" onClick={()=>handleDelete(id)}><FaTrash /></button>
-                              <button className="btn btn-outline-warning" onClick={()=>handleEdit(id)}><FaPencilAlt /></button>
+                              <button className="btn btn-outline-danger my-2" onClick={()=>handleDelete(id)}><FaTrash /></button>
+                              <button className="btn btn-outline-warning my-2" onClick={()=>handleEdit(id)}><FaPencilAlt /></button>
+                              <button className="btn btn-outline-info my-2" onClick={()=>handleOrder(id)}><TbShoppingCartCopy /></button>
                             </td>
                           </tr>
                         );
