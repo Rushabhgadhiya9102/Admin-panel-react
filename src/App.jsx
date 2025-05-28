@@ -64,6 +64,11 @@ const App = () => {
     if(files){
 
       const selectFile = files[0]
+
+      if(selectFile.size > 5242880){
+          alert("File should be less than 5mb")
+      }
+
       const reader = new FileReader()
   
       reader.onloadend = () =>{
@@ -174,7 +179,7 @@ const App = () => {
       
         <Aside />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home productData={productData} />} />
           <Route
             path="/Form"
             element={

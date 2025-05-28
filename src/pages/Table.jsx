@@ -56,7 +56,7 @@ const Table = (props) => {
                           <tr>
                             <td>{index + 1}</td>
                             <td>
-                              <img src={image?.url || ''} className="w-25 h-25 img-fluid" alt={productname} />
+                              <img src={image?.url} className="img-fluid" alt={productname} style={{width:"50px", height:"50px"}} />
                             </td>
                             <td>{productname}</td>
                             <td>{description}</td>
