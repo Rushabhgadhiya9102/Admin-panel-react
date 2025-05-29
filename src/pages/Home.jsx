@@ -3,7 +3,9 @@ import Header from "../components/Header";
 import { LineChart } from "@mui/x-charts";
 
 const Home = (props) => {
-  const { productData, order } = props;
+  const { productData, order, count } = props;
+
+  console.log(count)
   return (
     <>
       <div className="main-panel">
@@ -93,7 +95,7 @@ const Home = (props) => {
                       <div className="col col-stats ms-3 ms-sm-0">
                         <div className="numbers">
                           <p className="card-category">Order</p>
-                          <h4 className="card-title">576</h4>
+                          <h4 className="card-title">{count}</h4>
                         </div>
                       </div>
                     </div>

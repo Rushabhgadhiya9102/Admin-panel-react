@@ -20,6 +20,8 @@ const App = () => {
   const [order, setOrder] = useState([])
   const [editId, setEditId] = useState(null)
   const [error,setError] = useState({})
+  const [count, setCount] = useState(0)
+
 
    // --------- S T A T E - H A N D L E - E N D -----------
 
@@ -36,6 +38,10 @@ const App = () => {
 
     let storedData = JSON.parse(localStorage.getItem("productData")) || []
     setProductData(storedData)
+
+    let orderData = JSON.parse(localStorage.getItem("orderData")) || []
+    setOrder(orderData)
+    setCount(orderData.length)  
 
     },[])
 
@@ -199,7 +205,7 @@ const App = () => {
 
   // ---------- H A N D L E - V A L I D A T I O N - E N D -------------
 
-  // ---------- handle - order - start ------------
+  // ---------- H A N D L E - O R D E R - S T A R T ------------
 
     const handleOrder = (id)=>{
 
@@ -207,18 +213,19 @@ const App = () => {
       
       const orderData = [...order, selectedProduct]
       setOrder(orderData)
-
-      console.log(orderData)
+      localStorage.setItem("orderData", JSON.stringify(orderData))
+      setCount(orderData.length)
+      
     }
 
-  // ---------- handle - order - end ------------
+  // ---------- H A N D L E - O R D E R - E N D ------------
 
   return (
     <>
       
         <Aside />
         <Routes>
-          <Route path="/" element={<Home productData={productData} order={order} />} />
+          <Route path="/" element={<Home productData={productData} order={order} count={count} />} />
           <Route
             path="/Form"
             element={
