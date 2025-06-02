@@ -200,12 +200,40 @@ const App = () => {
 
   }
 
+  // ------------ C H A R T - D A T A --------------
+
+  const xAxisData = [1, 2, 3, 5, 8, 10]
+  const [seriesData, setSeriesData] = useState([2, 5.5, 2, 8.5, 1.5, 5]);
+
+  useEffect(() => {
+    const seriesInterval = setInterval(() => {
+      const newData = xAxisData.map(() =>
+        Number((Math.random() * 10).toFixed(2))
+      );
+
+      setSeriesData(newData);
+    }, 3000);
+
+    return () => clearInterval(seriesInterval);
+  }, [xAxisData]);
+
+
   return (
     <>
-
       <Aside />
       <Routes>
-        <Route path="/" element={<Home productData={productData} order={order} count={count} />} />
+        <Route
+          path="/"
+          element={
+            <Home
+              productData={productData}
+              order={order}
+              count={count}
+              xAxisData={xAxisData}
+              seriesData={seriesData}
+            />
+          }
+        />
         <Route
           path="/Form"
           element={
@@ -232,7 +260,6 @@ const App = () => {
           }
         />
       </Routes>
-
     </>
   );
 };

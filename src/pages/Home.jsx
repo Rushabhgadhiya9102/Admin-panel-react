@@ -3,7 +3,7 @@ import Header from "../components/Header";
 import { LineChart } from "@mui/x-charts";
 
 const Home = (props) => {
-  const { productData, order, count } = props;
+  const { productData, order, count, seriesData, xAxisData } = props;
 
   console.log(count)
   return (
@@ -137,10 +137,10 @@ const Home = (props) => {
                       style={{ height: "315px" }}
                     >
                       <LineChart
-                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                        xAxis={[{ data: xAxisData }]}
                         series={[
                           {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                            data: seriesData,
                             area: true,
                           },
                         ]}
@@ -200,10 +200,10 @@ const Home = (props) => {
                     <p className="text-muted">Users online</p>
                     <div className="pull-in sparkline-fix">
                       <LineChart
-                        xAxis={[{ data: [1, 2, 3, 5, 8, 10] }]}
+                        xAxis={[{ data: xAxisData }]}
                         series={[
                           {
-                            data: [2, 5.5, 2, 8.5, 1.5, 5],
+                            data: seriesData,
                           },
                         ]}
                         height={100}
