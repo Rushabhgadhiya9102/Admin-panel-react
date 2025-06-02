@@ -11,43 +11,36 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Aside from "./components/Aside";
 
 const App = () => {
-  
-  // --------- S T A T E - H A N D L E - S T A R T ----------
+
+  // --------- S T A T E - H A N D L E ----------
 
   const [product, setProduct] = useState({});
   const [productData, setProductData] = useState([]);
   const [warehouse, setWarehouse] = useState([]);
   const [order, setOrder] = useState([])
   const [editId, setEditId] = useState(null)
-  const [error,setError] = useState({})
+  const [error, setError] = useState({})
   const [count, setCount] = useState(0)
 
+  // --------- R E F R E N C E S - S T A T E -------------
 
-   // --------- S T A T E - H A N D L E - E N D -----------
+  const navigate = useNavigate()
+  const inputRef = useRef()
 
-   // --------- R E F R E N C E S - S T A T E - H A N D L E - S T A R T -------------
+  // --------- L O C A L - S T O R A G E  ------------
 
-   const navigate = useNavigate()
-   const inputRef = useRef()
-
-   // --------- R E F R E N C E S - S T A T E - H A N D L E - E N D -------------
-
-   // --------- L O C A L - S T O R A G E - S T A R T ------------
-
-    useEffect(()=>{
+  useEffect(() => {
 
     let storedData = JSON.parse(localStorage.getItem("productData")) || []
     setProductData(storedData)
 
     let orderData = JSON.parse(localStorage.getItem("orderData")) || []
     setOrder(orderData)
-    setCount(orderData.length)  
+    setCount(orderData.length)
 
-    },[])
+  }, [])
 
-   // --------- L O C A L - S T O R A G E - E N D ------------
-
-  // --------- H A N D L E - C H A N G E - S T A R T -----------
+  // --------- H A N D L E - C H A N G E -----------
 
   const handleChange = (e) => {
     const { name, value, checked, files } = e.target;
@@ -70,59 +63,57 @@ const App = () => {
 
     // ----------- IMAGES -----------
 
-    if(files){
+    if (files) {
 
       const selectFile = files[0]
 
-      if(selectFile.size > 5242880){
-          alert("File should be less than 5mb")
+      if (selectFile.size > 5242880) {
+        alert("File should be less than 5mb")
       }
 
       const reader = new FileReader()
-  
-      reader.onloadend = () =>{
-  
+
+      reader.onloadend = () => {
+
         const fileObj = {
-          type : selectFile.type,
+          type: selectFile.type,
           name: selectFile.name,
-          url : reader.result
+          url: reader.result
         };
-  
+
         setProduct((prev) => ({ ...prev, [name]: fileObj }))
       };
-  
+
       reader.readAsDataURL(selectFile)
 
-    }else{
+    } else {
 
       setProduct((prev) => ({ ...prev, [name]: value }))
     }
-    
+
   };
 
-  // --------- H A N D L E - C H A N G E - E N D ----------
 
-
-  // ---------- H A N D L E - S U B M I T - S T A R T -----------
+  // ---------- H A N D L E - S U B M I T -----------
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!handleValidation()) return
+    if (!handleValidation()) return
 
     // --------- EDIT SECTION ----------
 
-    if(editId === null){
+    if (editId === null) {
 
       const newData = [...productData, { ...product, id: Date.now() }];
       setProductData(newData);
       localStorage.setItem("productData", JSON.stringify(newData))
 
-    }else{
+    } else {
 
-      let data = productData.map((val)=>{
+      let data = productData.map((val) => {
 
-        if(val.id === editId){
+        if (val.id === editId) {
           val = product
         }
         return val
@@ -131,30 +122,27 @@ const App = () => {
       localStorage.setItem("productData", JSON.stringify(data))
       setProductData(data)
       setEditId(null)
-      
+
     }
 
     setProduct({});
     setWarehouse([]);
     inputRef.current.value = ""
     navigate('/Table')
-    
+
   };
 
-  // ---------- H A N D L E - S U B M I T - E N D -----------
 
+  // ---------- H A N D L E - C A N C E L -----------
 
-  // ---------- H A N D L E - C A N C E L - S T A R T -----------
-
-  const handleCancel = () =>{
+  const handleCancel = () => {
 
     setProduct({});
     setWarehouse([]);
 
   }
-  // ---------- H A N D L E - C A N C E L - E N D -----------
 
-  // ---------- H A N D L E - D E L E T E - S T A R T -------------
+  // ---------- H A N D L E - D E L E T E -------------
 
   const handleDelete = (id) => {
 
@@ -164,95 +152,87 @@ const App = () => {
 
   };
 
-  // ---------- H A N D L E - D E L E T E - E N D -------------
+  // ---------- H A N D L E - E D I T -------------
 
-  // ---------- H A N D L E - E D I T - S T A R T -------------
+  const handleEdit = (id) => {
 
-    const handleEdit = (id) =>{
+    let editData = productData.filter((val) => val.id === id)[0]
 
-      let editData = productData.filter((val) => val.id === id)[0]
+    if (editData) {
 
-      if(editData){
-
-        setProduct(editData)
-        setWarehouse(editData.warehouse || [])
-        setEditId(id)
-
-      }
-
-      navigate('/Form')
+      setProduct(editData)
+      setWarehouse(editData.warehouse || [])
+      setEditId(id)
 
     }
 
-  // ---------- H A N D L E - E D I T - E N D -------------
+    navigate('/Form')
 
-  // ---------- H A N D L E - V A L I D A T I O N - S T A R T -------------
+  }
 
-    const handleValidation = ()=>{
+  // ---------- H A N D L E - V A L I D A T I O N  -------------
 
-      let errors = {}
-      
-      if(!product.productname)errors.productname = "Product name is required"
-      if(!product.productprice)errors.productprice = "Product price is required"
-      if(!product.stock)errors.stock = "Product stock is required"
-      if(!product.description)errors.description = "Product description is required"
-      if(!product.warehouse)errors.warehouse = "Product warehouse is required"
+  const handleValidation = () => {
 
-      setError(errors)
-      return Object.keys(errors).length === 0
+    let errors = {}
 
-    }
+    if (!product.productname) errors.productname = "Product name is required"
+    if (!product.productprice) errors.productprice = "Product price is required"
+    if (!product.stock) errors.stock = "Product stock is required"
+    if (!product.description) errors.description = "Product description is required"
+    if (!product.warehouse) errors.warehouse = "Product warehouse is required"
 
-  // ---------- H A N D L E - V A L I D A T I O N - E N D -------------
+    setError(errors)
+    return Object.keys(errors).length === 0
 
-  // ---------- H A N D L E - O R D E R - S T A R T ------------
+  }
 
-    const handleOrder = (id)=>{
+  // ---------- H A N D L E - O R D E R ------------
 
-      const selectedProduct = productData.find((item) => item.id === id)
-      
-      const orderData = [...order, selectedProduct]
-      setOrder(orderData)
-      localStorage.setItem("orderData", JSON.stringify(orderData))
-      setCount(orderData.length)
-      
-    }
+  const handleOrder = (id) => {
 
-  // ---------- H A N D L E - O R D E R - E N D ------------
+    const selectedProduct = productData.find((item) => item.id === id)
+
+    const orderData = [...order, selectedProduct]
+    setOrder(orderData)
+    localStorage.setItem("orderData", JSON.stringify(orderData))
+    setCount(orderData.length)
+
+  }
 
   return (
     <>
-      
-        <Aside />
-        <Routes>
-          <Route path="/" element={<Home productData={productData} order={order} count={count} />} />
-          <Route
-            path="/Form"
-            element={
-              <Form
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                handleCancel={handleCancel}
-                product={product}
-                warehouse={warehouse}
-                error={error}
-                inputRef={inputRef}
-              />
-            }
-          />
-          <Route
-            path="/Table"
-            element={
-              <Table
-                productData={productData}
-                handleDelete={handleDelete}
-                handleEdit = {handleEdit}
-                handleOrder={handleOrder}
-              />
-            }
-          />
-        </Routes>
-     
+
+      <Aside />
+      <Routes>
+        <Route path="/" element={<Home productData={productData} order={order} count={count} />} />
+        <Route
+          path="/Form"
+          element={
+            <Form
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              handleCancel={handleCancel}
+              product={product}
+              warehouse={warehouse}
+              error={error}
+              inputRef={inputRef}
+            />
+          }
+        />
+        <Route
+          path="/Table"
+          element={
+            <Table
+              productData={productData}
+              handleDelete={handleDelete}
+              handleEdit={handleEdit}
+              handleOrder={handleOrder}
+            />
+          }
+        />
+      </Routes>
+
     </>
   );
 };

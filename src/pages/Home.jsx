@@ -280,7 +280,7 @@ const Home = (props) => {
                                     <td>{description}</td>
                                     <td>${productprice}</td>
                                     <td>{stock}</td>
-                                    <td>{warehouse}</td>
+                                    <td>{warehouse.toString('')}</td>
                                   </tr>
                                 );
                               })}
@@ -304,7 +304,7 @@ const Home = (props) => {
             </div>
             <div className="row">
               <div className="col-md-4">
-                <div className="card card-round">
+                <div className="card card-round overflow-x-scroll" style={{height:"540px"}}>
                   <div className="card-header">
                     <h4 className="card-title">Order Palced</h4>
                   </div>

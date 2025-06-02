@@ -52,22 +52,22 @@ const Table = (props) => {
                     <tbody>
                       {productData.map((val, index) => {
 
-                        const {image, productname, description, productprice, stock, warehouse, id} = val 
+                        const { image, productname, description, productprice, stock, warehouse, id } = val
                         return (
                           <tr>
                             <td>{index + 1}</td>
                             <td>
-                              <img src={image?.url} className="img-fluid" alt={productname} style={{width:"50px", height:"50px"}} />
+                              <img src={image?.url} className="img-fluid" alt={productname} style={{ width: "50px", height: "50px" }} />
                             </td>
                             <td>{productname}</td>
                             <td>{description}</td>
                             <td>$ {productprice}</td>
                             <td>{stock}</td>
-                            <td>{warehouse}</td>
+                            <td>{warehouse.toString('')}</td>
                             <td className="d-flex gap-2">
-                              <button className="btn btn-outline-danger my-2" onClick={()=>handleDelete(id)}><FaTrash /></button>
-                              <button className="btn btn-outline-warning my-2" onClick={()=>handleEdit(id)}><FaPencilAlt /></button>
-                              <button className="btn btn-outline-info my-2" onClick={()=>handleOrder(id)}><TbShoppingCartCopy /></button>
+                              <button className="btn btn-outline-danger my-2" onClick={() => handleDelete(id)}><FaTrash /></button>
+                              <button className="btn btn-outline-warning my-2" onClick={() => handleEdit(id)}><FaPencilAlt /></button>
+                              <button className="btn btn-outline-info my-2" onClick={() => handleOrder(id)}><TbShoppingCartCopy /></button>
                             </td>
                           </tr>
                         );

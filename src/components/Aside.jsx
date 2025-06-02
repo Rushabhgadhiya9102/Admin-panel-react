@@ -1,4 +1,5 @@
 import React from "react";
+import logo from '../assets/img/kaiadmin/logo_light.png'
 import { FaFileSignature, FaHome, FaTable } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -12,7 +13,7 @@ const Aside = () => {
           <div className="logo-header" data-background-color="dark">
             <a href="index.html" className="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src={logo}
                 alt="navbar brand"
                 className="navbar-brand"
                 height={20}

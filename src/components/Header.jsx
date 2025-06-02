@@ -1,4 +1,6 @@
 import React from "react";
+import logo from '../assets/img/kaiadmin/logo_light.svg'
+import profile from '../assets/img/profile.jpg'
 
 const Header = () => {
   return (
@@ -7,9 +9,9 @@ const Header = () => {
         <div className="main-header-logo">
           {/* Logo Header */}
           <div className="logo-header" data-background-color="dark">
-            <a href="index.html" className="logo">
+            <a href="#" className="logo">
               <img
-                src="assets/img/kaiadmin/logo_light.svg"
+                src={logo}
                 alt="navbar brand"
                 className="navbar-brand"
                 height={20}
@@ -314,7 +316,7 @@ const Header = () => {
                 >
                   <div className="avatar-sm">
                     <img
-                      src="assets/img/profile.jpg"
+                      src={profile}
                       alt="..."
                       className="avatar-img rounded-circle"
                     />
@@ -330,7 +332,7 @@ const Header = () => {
                       <div className="user-box">
                         <div className="avatar-lg">
                           <img
-                            src="assets/img/profile.jpg"
+                            src=""
                             alt="image profile"
                             className="avatar-img rounded"
                           />
